@@ -37,12 +37,6 @@
       body: payload,
       mode: 'no-cors',
     })
-    .then((res) => {
-      res.json()
-    })
-    .then((data) => {
-        (data) => console.log(data);
-    })
     .catch((err) => console.log(err));
   });
 
@@ -50,10 +44,7 @@
         {
            method: 'GET',
            mode: 'cors',
-           cache: 'default',
-           'headers': {
-                    'Access-Control-Allow-Origin': '*',
-           }
+           cache: 'reload',
         })
     .then((res) => {
         return res.json()
@@ -63,7 +54,7 @@
             return `<div class="post"><h4>ID:${post.id}</h4> <div>Name: ${post.name}</div> <p>Content: ${post.content}</p> <p>Created At: ${post.created_at}</p> </div>`
         }).join("")
         document.querySelector("#current-posts").insertAdjacentHTML("afterbegin",html)
-    });
+    }); 
 </script>
 
 {%endblock%}
