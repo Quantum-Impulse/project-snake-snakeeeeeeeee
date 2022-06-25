@@ -38,7 +38,6 @@
       mode: 'no-cors',
     })
     .then((res) => {
-      console.log(res)
       res.json()
     })
     .then((data) => {
@@ -57,13 +56,10 @@
            }
         })
     .then((res) => {
-        console.log(res)
         return res.json()
     })
     .then((data) => {
-        console.log(data)
         const html = data.timeline_post.map(post =>{
-            console.log(post)
             return `<div class="post"><h4>ID:${post.id}</h4> <div>Name: ${post.name}</div> <p>Content: ${post.content}</p> <p>Created At: ${post.created_at}</p> </div>`
         }).join("")
         document.querySelector("#current-posts").insertAdjacentHTML("afterbegin",html)
