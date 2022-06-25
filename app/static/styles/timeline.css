@@ -210,5 +210,7 @@ footer {
     margin: 25px;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-style: double;
+    border-color: #4B1AA1;
 }
 
