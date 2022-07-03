@@ -2,7 +2,6 @@ from optparse import TitledHelpFormatter
 import os
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
-from sqlalchemy import true
 import datetime
 from peewee import *
 from playhouse.shortcuts import model_to_dict
@@ -12,12 +11,16 @@ load_dotenv()
 
 app = Flask(__name__)
 
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306
-)
+if os.getenv("TESTING") == "true":
+       print("Running in test mode")
+       mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+       mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+              user=os.getenv("MYSQL_USER"),
+              password=os.getenv("MYSQL_PASSWORD"),
+              host=os.getenv("MYSQL_HOST"),
+              port=3306
+              )      
 
 print(mydb)
 
@@ -253,15 +256,3 @@ def get_time_line_post():
         for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     } 
-
-# integration testing for flask application interaction with a database
-if os.getenv("TESTING") == true:
-       print("Running in test mode")
-       mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', url=True)
-else:
-       mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
-              user=os.getenv("MYSQL_USER"),
-              password=os.getenv("MYSQL_PASSWORD"),
-              host=os.getenv("MYSQL_HOST"),
-              port=3306
-       )      

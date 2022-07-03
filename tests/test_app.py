@@ -3,8 +3,6 @@ import unittest
 import os
 from urllib import response
 
-from sqlalchemy import null
-os.environ['TESTING'] = 'true'
 
 from app import app
 
