@@ -2,7 +2,7 @@ from optparse import TitledHelpFormatter
 import os
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
-import folium
+from sqlalchemy import true
 import datetime
 from peewee import *
 from playhouse.shortcuts import model_to_dict
@@ -227,13 +227,22 @@ def timeline():
 #Post request to get the data from the form
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
+    if not 'name' in request.form:
+        return "Invalid name", 400
+    else:
+        name = request.form['name']
+
     email = request.form['email']
+    if "@" not in email:
+        return "Invalid email", 400
+
     content = request.form['content']
+    if content == "":
+        return "Invalid content", 400
+
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
-    print(model_to_dict(timeline_post))
-    print("TEST:", timeline_post)
-    return model_to_dict(timeline_post)
+
+    return model_to_dict(timeline_post)    
 
 #Get timeline post
 @app.route('/api/timeline_post', methods=['GET'])
@@ -244,3 +253,15 @@ def get_time_line_post():
         for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     } 
+
+# integration testing for flask application interaction with a database
+if os.getenv("TESTING") == true:
+       print("Running in test mode")
+       mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', url=True)
+else:
+       mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+              user=os.getenv("MYSQL_USER"),
+              password=os.getenv("MYSQL_PASSWORD"),
+              host=os.getenv("MYSQL_HOST"),
+              port=3306
+       )      
