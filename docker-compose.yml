@@ -9,9 +9,9 @@ services:
     environment: 
       - FLASK_ENV=development
     ports: 
-      -"5000:5000"
+      - "5000:5000"
     volumes: 
-      -.:/myportfolio
+      - .:/myportfolio
     depends_on:
       - mysql
 
