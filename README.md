@@ -80,3 +80,7 @@ Please make sure to update tests as appropriate.
 
 
 test fork and remote on git
+
+## Notes
+if script does work on the VPS use this command: sed -i -e 's/\r$//' scriptname.sh
+Unix uses different line endings so can't read the file you created on Windows. Hence it is seeing ^M as an illegal character.
