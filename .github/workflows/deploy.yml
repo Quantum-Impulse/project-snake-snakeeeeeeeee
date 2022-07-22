@@ -30,6 +30,4 @@ jobs:
         
       - name: Deploy Site
         run: >
-          ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && pwd'
-          ssh my-vps 'sed -i -e "s/\r$//" ~/project-snake-snakeeeeeeeee/redeploy-site.sh'
-          ssh my-vps '~/project-snake-snakeeeeeeeee/redeploy-site.sh'
+          ssh my-vps '~/redeploy-site.sh'
