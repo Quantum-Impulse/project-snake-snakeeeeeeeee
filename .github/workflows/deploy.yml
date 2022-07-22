@@ -10,10 +10,10 @@ jobs:
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
-    step:
+    steps:
       - name: Configure SSH
         run: |
-          mkdir -p ~/ .shh/
+          mkdir -p ~/ .ssh/
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key.pem
           chmod 600 ~/.ssh/deploy-key.pem
           cat >> ~/.ssh/config <<END
