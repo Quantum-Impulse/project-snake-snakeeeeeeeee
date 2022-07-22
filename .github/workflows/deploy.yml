@@ -29,6 +29,6 @@ jobs:
           SSH_IP: ${{ secrets.SSH_IP }}
         
       - name: Deploy Site
-        run: |
+        run: >
         ssh my-vps 'sed -i -e 's/\r$//' ~/project-snake-snakeeeeeeeee/redeploy-site.sh'
         ssh my-vps '~/project-snake-snakeeeeeeeee/redeploy-site.sh'
