@@ -30,4 +30,4 @@ jobs:
         
       - name: Deploy Site
         run: >
-          ssh my-vps '~/redeploy-site.sh'
+          ssh my-vps '~/project-snake-snakeeeeeeeee/redeploy-site.sh'
