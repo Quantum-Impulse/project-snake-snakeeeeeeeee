@@ -164,9 +164,11 @@ hobbies_json= {
         }
     ],
     "Enrique":[
-     {
-         
-     }
+        {
+           "image":'../static/img/cbum.png',
+           "name": "Gym Training",
+           "description": "We all are gonna make it brah's",
+        }
  ]   
     
 }
