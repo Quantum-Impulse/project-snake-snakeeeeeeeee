@@ -33,4 +33,4 @@ jobs:
           ssh my-vps 'sed -i -e "s/\r$//" ~/project-snake-snakeeeeeeeee/redeploy-site.sh && ~/project-snake-snakeeeeeeeee/redeploy-site.sh'
       
       - name: Check Docker Status
-        run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && docker-compose ps'
+        run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && docker compose ps'
